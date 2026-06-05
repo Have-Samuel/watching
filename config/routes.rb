@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "posts/index"
   get "pages/home", to: "pages#home"
   get "pages/about", to: "pages#about"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
