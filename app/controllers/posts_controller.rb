@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   # This one shows a single blog post in more detail (probably with comments and stuff)
   def show
+    @post = Post.find(params[:id])
   end
 
   # The actual page where you create a new blog post
