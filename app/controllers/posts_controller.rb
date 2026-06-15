@@ -14,12 +14,23 @@ class PostsController < ApplicationController
     # then you click submit and it creates
     # the post and then redirects you to
     # the show page for that post
+    @post = Post.new
   end
 
   # You don't actually see this page, this is just where the 
   # the application (rails) actually creates the blog post after you hit submit
   def create
     # lets save the blog to the post in the database
+    @post = Post.new(post_params)
+
+    if @post.save
+      # Takes you to the show page for that post
+      # This changes from posts/@post to posts/:id
+      # Redirect you somewhere,,probably back to the post show page
+      redirect_to @post
+    else
+      render :new, status: :unprocessable_entity
+    end
     # Redirect you somewhere,,probably back to the post show page
   end
 
@@ -38,5 +49,10 @@ class PostsController < ApplicationController
   # actually deletes the blog post.
   # You get here by pressing  the delete button
   def destroy
+  end
+
+  private
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end
