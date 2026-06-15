@@ -3,7 +3,18 @@
   <p>Find me in app/views/posts/new.html.erb</p>
  <%# This is a new post form.%>
  <%# posts_path == "/posts"%>
-  <%= form_with url: posts_path, method: :post do |form| %>
+  <%= form_with model: @post do |form| %>
+  <%# Render any errors if they exit %>
+  <% if @post.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <strong class="font-bold">Validation failed:</strong>
+      <ul class="list-disc pl-5">
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= form.label :title%><br>
     <%= form.text_field :title, class: "border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
