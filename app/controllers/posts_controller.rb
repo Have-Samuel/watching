@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   # This one shows all the posts
   def index
+    @posts = Post.all
   end
 
   # This one shows a single blog post in more detail (probably with comments and stuff)
