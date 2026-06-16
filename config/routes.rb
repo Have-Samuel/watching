@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "posts", to: "posts#index"
+  get "posts", to: "posts#index", as: :posts
   get "posts/new", to: "posts#new"
   get "posts/edit", to: "posts#edit"
 
