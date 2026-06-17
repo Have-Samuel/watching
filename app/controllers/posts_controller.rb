@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: %i[show edit update destroy]
   # This one shows all the posts
   def index
     @posts = Post.all
@@ -6,7 +7,6 @@ class PostsController < ApplicationController
 
   # This one shows a single blog post in more detail (probably with comments and stuff)
   def show
-    @post = Post.find(params[:id])
   end
 
   # The actual page where you create a new blog post
@@ -43,7 +43,12 @@ class PostsController < ApplicationController
   #  actually updates the blog post after you hit submit on the edit page
   def update
     # Lets save the data to the post in the database
-    # Redirect you somewhere,,probably back to the post show page
+    # Redirect you somewhere,probably back to the post show page
+    if @post.update(post_params)
+            redirect_to post_path(@post), notice: "Post was sucessfully updated."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # You don't actually see this paage, this is just where the application (rails)
@@ -55,5 +60,9 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end
