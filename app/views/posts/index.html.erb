@@ -18,7 +18,11 @@
         <td class="border px-4 py-2"><%= post.title %></td>
         <td class="border px-4 py-2">
           <%= link_to "show", post_path(post), class: "text-blue-500 hover:underline" %>
-          </td>
+          <%= link_to "Edit", edit_post_path(post), class: "text-green-500 hover:underline" %>
+          <%# Data confirm only workswithout turbo %>
+          <%# With turbo, you need a specific data confirm attribute %>
+          <%= button_to "Delete", post_path(post), method: :delete,data: { turbo_confirm: "Are you sure you want to delete this post?" }, class: "text-red-500 hover:underline ml-2" %>
+        </td>
       </tr>
       <% end %>
     </tbody>
