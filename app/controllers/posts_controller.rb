@@ -55,6 +55,11 @@ class PostsController < ApplicationController
   # actually deletes the blog post.
   # You get here by pressing  the delete button
   def destroy
+    if @post.destroy
+      redirect_to posts_path, notice: "Post was successfully deleted."
+    else
+      redirect_to posts_path(@post), alert: "Failed to delete post."
+    end
   end
 
   private
